@@ -3,12 +3,10 @@ package proj;
 public class Pillar {
   
     public Coordinate coord;
-    public int rad;
-    public int diskId;
+    public Disk disk;
 
-    public Pillar (Coordinate c, int r, int did){
+    public Pillar (Coordinate c, Disk d){
       this.coord = c;
-      this.rad = r;
-      this.diskId = did;
+      this.disk = d;
     }
 }
