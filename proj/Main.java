@@ -1,10 +1,8 @@
 package proj;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
+
 
 public class Main {
 
@@ -16,7 +14,7 @@ public class Main {
         List<Coordinate> coords = new ArrayList();
         List<Disk> disks = new ArrayList();
         takeInput(w, coords, disks);
-        //yeet
+        System.out.println(coords);
     }
 
     public static void takeInput(int w, List <Coordinate> cl, List <Disk> dl) throws FileNotFoundException{
