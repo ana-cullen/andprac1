@@ -13,4 +13,9 @@ public class Coordinate {
     public double dist(Coordinate c){
         return Math.sqrt((this.x-c.x)^2+(this.y-c.y)^2);
     }
+
+    @Override
+    public String toString(){
+        return "("+x+", "+y+")";
+    }
 }

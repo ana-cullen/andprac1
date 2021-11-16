@@ -11,17 +11,17 @@ public class Main {
      */
     public static void main(String[] args) throws FileNotFoundException {
         int w = 0;
-        List<Coordinate> coords = new ArrayList();
-        List<Disk> disks = new ArrayList();
+        ArrayList<Coordinate> coords = new ArrayList();
+        ArrayList<Disk> disks = new ArrayList();
         takeInput(w, coords, disks);
         System.out.println(coords);
     }
 
-    public static void filterDisks(List <Disk> disks){
+    public static void filterDisks(ArrayList <Disk> disks){
         for(int i = 0; i< disks.size(); i++){
             for(int j = 0; j< disks.size(); j++){
                 if( i != j){
-                    if(disks.get(i).radius <= disks.get(j) && disks.get(i).cost >= disks.get(j).cost)
+                    if(disks.get(i).radius <= disks.get(j).radius && disks.get(i).cost >= disks.get(j).cost)
                         disks.remove(i);
                 }
             }
@@ -47,7 +47,6 @@ public class Main {
             String[] split = disk.split(" ");
             dl.add(new Disk(Integer.parseInt(split[0]), Integer.parseInt(split[0])));
         }
-        System.out.println(n);
         myReader.close();
     }
 
