@@ -14,7 +14,9 @@ public class Main {
         ArrayList<Coordinate> coords = new ArrayList();
         ArrayList<Disk> disks = new ArrayList();
         takeInput(w, coords, disks);
-        System.out.println(coords);
+        System.out.println(disks);
+        filterDisks(disks);
+        System.out.println(disks);
     }
 
     public static void filterDisks(ArrayList <Disk> disks){
@@ -45,7 +47,7 @@ public class Main {
         for(int i = 0; i < m; i++){
             String disk = myReader.nextLine();
             String[] split = disk.split(" ");
-            dl.add(new Disk(Integer.parseInt(split[0]), Integer.parseInt(split[0])));
+            dl.add(new Disk(Integer.parseInt(split[0]), Integer.parseInt(split[1])));
         }
         myReader.close();
     }

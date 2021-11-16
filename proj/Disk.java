@@ -9,4 +9,9 @@ public class Disk {
         this.radius = r;
         this.cost = c;
     }
+
+    @Override
+    public String toString(){
+        return "r: "+this.radius+" c: "+cost;
+    }
 }
