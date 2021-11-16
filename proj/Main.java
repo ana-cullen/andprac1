@@ -17,6 +17,34 @@ public class Main {
         System.out.println(disks);
         filterDisks(disks);
         System.out.println(disks);
+        List<List<String>> a = createGraph(coords, disks, w);
+        System.out.println(a);
+    }
+
+    public static List<List<String>> createGraph(List<Coordinate> coords, List<Disk> disks, int w) {
+        List<List<String>> nodes = new ArrayList<>();
+        List<Integer> startNode = new ArrayList<>();
+        int endNode = ((coords.size() * disks.size()) ^ 2);
+        for (int i = 0; i < coords.size(); i++) {
+            for (int j = 0; j < disks.size(); j++) {
+                List<String> x = new ArrayList<>();
+                inner:
+                for (int h = 0; h < coords.size(); h++) {
+                    if (!(i == h)) {
+                        int distance = coords.get(i).dist(coords.get(h));
+                        for (int k = 0; k < disks.size(); k++) {
+                            if (disks.get(j).radius + disks.get(k).radius < distance) {
+                                break inner;
+                            }
+                            x.add("coords: " + h + " disk: " + k);
+                        }
+
+                    }
+                }
+                nodes.add(x);
+            }
+        }
+        return nodes;
     }
 
     public static void filterDisks(ArrayList <Disk> disks){
