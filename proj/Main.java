@@ -14,7 +14,6 @@ public class Main {
         ArrayList<Coordinate> coords = new ArrayList();
         ArrayList<Disk> disks = new ArrayList();
         takeInput(w, coords, disks);
-        System.out.println(disks);
         filterDisks(disks);
         System.out.println(disks);
         List<List<String>> a = createGraph(coords, disks, w);
@@ -56,6 +55,9 @@ public class Main {
                 }
             }
         }
+        //sorts based on radius
+        Collections.sort(disks);
+        Collections.reverse(disks);
     }
 
     public static void takeInput(int w, List <Coordinate> cl, List <Disk> dl) throws FileNotFoundException{
