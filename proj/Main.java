@@ -17,6 +17,17 @@ public class Main {
         System.out.println(coords);
     }
 
+    public static void filterDisks(List <Disk> disks){
+        for(int i = 0; i< disks.size(); i++){
+            for(int j = 0; j< disks.size(); j++){
+                if( i != j){
+                    if(disks.get(i).radius <= disks.get(j) && disks.get(i).cost >= disks.get(j).cost)
+                        disks.remove(i);
+                }
+            }
+        }
+    }
+
     public static void takeInput(int w, List <Coordinate> cl, List <Disk> dl) throws FileNotFoundException{
 
         Scanner myReader = new Scanner(System.in);
