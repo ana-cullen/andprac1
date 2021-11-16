@@ -42,7 +42,7 @@ public class Main {
         for(int i = 0; i < n; i++){
             String coords = myReader.nextLine();
             String[] split = coords.split(" ");
-            cl.add(new Coordinate(Integer.parseInt(split[0]), Integer.parseInt(split[0])));
+            cl.add(new Coordinate(Integer.parseInt(split[0]), Integer.parseInt(split[1])));
         }
         for(int i = 0; i < m; i++){
             String disk = myReader.nextLine();
