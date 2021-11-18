@@ -17,7 +17,12 @@ public class Pillar {
     }
 
     public String toString(){
-        return this.coord.toString() + this.disk.toString();
+        return this.coord.toString() + " " + this.disk.toString() + " " + this.id;
+    }
+
+    public boolean inDistance(Pillar p){
+        int distance = this.coord.dist(p.coord);
+        return (distance <= this.disk.radius - p.disk.radius);
     }
 
     public boolean inRange(Pillar p){

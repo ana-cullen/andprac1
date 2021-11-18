@@ -25,4 +25,9 @@ public class Disk implements Comparable<Disk> {
     public String toString(){
         return "r: "+this.radius+" c: "+cost;
     }
+
+    @Override
+    public int compareTo(Disk o) {
+        return this.radius - o.radius;
+    }
 }
