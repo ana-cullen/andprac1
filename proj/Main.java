@@ -12,13 +12,10 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException {
         int w = 0;
         ArrayList<Coordinate> coords = new ArrayList();
-        ArrayList<Disk> disks = new ArrayList<>();
-        takeInput(w, coords, disks);
+        ArrayList<Disk> disks = new ArrayList();
+        takeInput(coords, disks);
         filterDisks(disks);
-
         List<List<Integer>> a = createGraph(coords, disks, w);
-        System.out.println(a.size());
-        System.out.println(a);
     }
 
     public static List<List<Integer>> createGraph(List<Coordinate> coords, List<Disk> disks, int w) {
@@ -29,12 +26,6 @@ public class Main {
         int endNode = 20000000;
         for (int i = 0; i < coords.size(); i++) {
             for (int j = 0; j < disks.size(); j++) {
-                if (coords.get(i).y - disks.get(j).radius <= 0) {
-                    int id = (10000*i) + j;
-                    Pillar p = new Pillar(coords.get(i), disks.get(j), id);
-                    startNode.add(p);
-                    startNodeInt.add(id);
-                }
                 List<Pillar> x = new ArrayList<>();
                 List<Integer> y = new ArrayList<>();
                 for (int h = 0; h < coords.size(); h++) {
@@ -76,13 +67,16 @@ public class Main {
                 }
             }
         }
+        //sorts based on radius
+        Collections.sort(disks);
+        Collections.reverse(disks);
     }
 
-    public static void takeInput(int w, List <Coordinate> cl, List <Disk> dl) throws FileNotFoundException{
+    public static int takeInput(List <Coordinate> cl, List <Disk> dl) throws FileNotFoundException{
         Scanner myReader = new Scanner(System.in);
         String fstLn = myReader.nextLine();
         String[] splitted = fstLn.split(" ");
-        int n, m;
+        int n, m, w;
         n = Integer.parseInt(splitted[0]);
         m = Integer.parseInt(splitted[1]);
         w = Integer.parseInt(splitted[2]);
@@ -91,12 +85,13 @@ public class Main {
             String[] split = coords.split(" ");
             cl.add(new Coordinate(Integer.parseInt(split[0]), Integer.parseInt(split[1])));
         }
-        for(int i = 0; i < m; i++) {
+        for(int i = 0; i < m; i++){
             String disk = myReader.nextLine();
             String[] split = disk.split(" ");
             dl.add(new Disk(Integer.parseInt(split[0]), Integer.parseInt(split[1])));
         }
-        dl.sort(Collections.reverseOrder());
+        myReader.close();
+        return w;
     }
 
 }
