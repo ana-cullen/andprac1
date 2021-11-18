@@ -10,14 +10,12 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws FileNotFoundException {
-        int w = 0;
         ArrayList<Coordinate> coords = new ArrayList();
         ArrayList<Disk> disks = new ArrayList();
-        takeInput(w, coords, disks);
+        int w = takeInput(coords, disks);
+        System.out.println(w);
         filterDisks(disks);
-        System.out.println(disks);
         List<List<String>> a = createGraph(coords, disks, w);
-        System.out.println(a);
     }
 
     public static List<List<String>> createGraph(List<Coordinate> coords, List<Disk> disks, int w) {
@@ -60,12 +58,11 @@ public class Main {
         Collections.reverse(disks);
     }
 
-    public static void takeInput(int w, List <Coordinate> cl, List <Disk> dl) throws FileNotFoundException{
-
+    public static int takeInput(List <Coordinate> cl, List <Disk> dl) throws FileNotFoundException{
         Scanner myReader = new Scanner(System.in);
         String fstLn = myReader.nextLine();
         String[] splitted = fstLn.split(" ");
-        int n, m;
+        int n, m, w;
         n = Integer.parseInt(splitted[0]);
         m = Integer.parseInt(splitted[1]);
         w = Integer.parseInt(splitted[2]);
@@ -80,6 +77,7 @@ public class Main {
             dl.add(new Disk(Integer.parseInt(split[0]), Integer.parseInt(split[1])));
         }
         myReader.close();
+        return w;
     }
 
 }
