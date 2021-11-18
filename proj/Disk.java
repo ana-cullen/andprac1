@@ -1,6 +1,6 @@
 package proj;
 
-public class Disk {
+public class Disk implements Comparable<Disk>{
 
     public int radius;
     public int cost;
@@ -13,5 +13,10 @@ public class Disk {
     @Override
     public String toString(){
         return "r: "+this.radius+" c: "+cost;
+    }
+
+    @Override
+    public int compareTo(Disk o) {
+        return this.radius - o.radius;
     }
 }

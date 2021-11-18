@@ -11,7 +11,10 @@ public class Coordinate {
     }
 
     public int dist(Coordinate c){
-        return (int) Math.ceil(Math.sqrt((this.x-c.x)^2+(this.y-c.y)^2));
+        int deltaX = Math.abs(this.x-c.x);
+        int deltaY = Math.abs(this.y-c.y);
+        return (int) Math.ceil(Math.sqrt(deltaX * deltaX + deltaY * deltaY));
+
     }
 
     @Override
