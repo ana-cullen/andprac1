@@ -10,12 +10,12 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws FileNotFoundException {
-        int w = 0;
         ArrayList<Coordinate> coords = new ArrayList();
         ArrayList<Disk> disks = new ArrayList();
-        takeInput(coords, disks);
+        int w = takeInput(coords, disks);
+        System.out.println(w);
         filterDisks(disks);
-        List<List<Integer>> a = createGraph(coords, disks, w);
+        List<List<String>> a = createGraph(coords, disks, w);
     }
 
     public static List<List<Integer>> createGraph(List<Coordinate> coords, List<Disk> disks, int w) {
