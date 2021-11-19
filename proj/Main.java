@@ -10,51 +10,15 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws FileNotFoundException {
-        ArrayList<Coordinate> coords = new ArrayList();
-        ArrayList<Disk> disks = new ArrayList();
+        ArrayList<Coordinate> coords = new ArrayList<Coordinate>();
+        ArrayList<Disk> disks = new ArrayList<Disk>();
         int w = takeInput(coords, disks);
         filterDisks(disks);
-        List<List<Integer>> a = createGraph(coords, disks, w);
-        System.out.println(a);
+        Graph g = new Graph(coords,disks,w);
+        int cheapestPathCost = g.dijkstras();
+        System.out.println(cheapestPathCost);
     }
 
-    public static List<List<Integer>> createGraph(List<Coordinate> coords, List<Disk> disks, int w) {
-        List<List<Integer>> graph = new ArrayList<>();
-        List<List<Pillar>> nodes = new ArrayList<>();
-        List<Pillar> startNode = new ArrayList<>();
-        List<Integer> startNodeInt = new ArrayList<>();
-        int endNode = 20000000;
-        for (int i = 0; i < coords.size(); i++) {
-            for (int j = 0; j < disks.size(); j++) {
-                List<Pillar> x = new ArrayList<>();
-                List<Integer> y = new ArrayList<>();
-                for (int h = 0; h < coords.size(); h++) {
-                    if (!(i == h)) {
-                        int distance = coords.get(i).dist(coords.get(h));
-                        for (int k = 0; k < disks.size(); k++) {
-                            if (disks.get(j).radius + disks.get(k).radius >= distance) {
-                                int id = (10000 * h) + k;
-                                Pillar p = new Pillar(coords.get(h), disks.get(k), id);
-                                x.add(p);
-                                y.add(id);
-                            }
-                            else{
-                                break;
-                            }
-                        }
-                    }
-                }
-                if (coords.get(i).y + disks.get(j).radius >= w){
-                    y.add(endNode);
-                }
-                nodes.add(x);
-                graph.add(y);
-            }
-        }
-        graph.add(0, startNodeInt);
-        nodes.add(0, startNode);
-        return graph;
-    }
 
     public static void filterDisks(ArrayList <Disk> disks){
         for(int i = 0; i< disks.size(); i++){
