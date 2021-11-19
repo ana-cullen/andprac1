@@ -13,9 +13,9 @@ public class Main {
         ArrayList<Coordinate> coords = new ArrayList();
         ArrayList<Disk> disks = new ArrayList();
         int w = takeInput(coords, disks);
-        System.out.println(w);
         filterDisks(disks);
-        List<List<String>> a = createGraph(coords, disks, w);
+        List<List<Integer>> a = createGraph(coords, disks, w);
+        System.out.println(a);
     }
 
     public static List<List<Integer>> createGraph(List<Coordinate> coords, List<Disk> disks, int w) {
@@ -45,8 +45,6 @@ public class Main {
                     }
                 }
                 if (coords.get(i).y + disks.get(j).radius >= w){
-                    System.out.println(coords.get(i).y + disks.get(j).radius);
-                    System.out.println(w);
                     y.add(endNode);
                 }
                 nodes.add(x);
