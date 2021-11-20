@@ -15,7 +15,7 @@ public class Graph {
 
   public Graph (ArrayList<Coordinate> coords, ArrayList<Disk> disks, int w) {
     this.w = w;
-    int count = 0;
+    int count = 1;
     for(int i = 0; i< coords.size(); i++){
       for(int j= 0; j< disks.size(); j++){
         Pillar v = new Pillar(coords.get(i), disks.get(j), count);
@@ -30,6 +30,7 @@ public class Graph {
       }
     }
     adj.add(sources);
+
     for(int k=0; k<vertices.size(); k++){
       ArrayList<Pillar> adjV = new ArrayList<Pillar>();
       for(int l=0; l<vertices.size(); l++){
@@ -68,11 +69,14 @@ public class Graph {
       }
     }
     ArrayList<Integer> endPathsCosts = new ArrayList<>();
+    System.out.println(sinks);
     for(int i=0;i<sinks.size();i++){
       Pillar n =sinks.get(i);
       Integer sCost =-1;
-      if(costs.size()>1)
-        sCost = costs.get(n.id+1);
+      if(costs.size()>1){
+        sCost = costs.get(n.id);
+        System.out.println(n.id + " ");
+      }
       endPathsCosts.add(sCost);
     }
     Collections.sort(endPathsCosts);
@@ -82,15 +86,16 @@ public class Graph {
   }
 
   public void checkAdj(Pillar cur){
-    int edgeCost = cur.disk.cost;
+    //int edgeCost = cur.disk.cost;
     int pathCost;
     for(int i =0; i<adj.get(cur.id).size(); i++){ //cur.id
       Pillar v = adj.get(cur.id).get(i);
       if(!explored.contains(v)){
-        System.out.println(cur.id + " " + this.costs.get(cur.id));
+        int edgeCost = v.disk.cost;
         pathCost = this.costs.get(cur.id) + edgeCost;
         if(pathCost < costs.get(v.id) && pathCost >= 0){
           costs.set(v.id, pathCost);
+          System.out.println(v.id + " " + pathCost);
         }
         this.pq.add(v);
       }
