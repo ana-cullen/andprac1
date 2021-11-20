@@ -47,8 +47,7 @@ public class Graph {
       }
       adj.add(adjV);
     }
-
-    System.out.println(this.adj.get(0).size());
+    System.out.println(this.adj);
   }
 
   public int dijkstras(){
