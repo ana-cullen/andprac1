@@ -47,7 +47,6 @@ public class Graph {
       }
       adj.add(adjV);
     }
-    System.out.println(this.adj);
   }
 
   public int dijkstras(){
@@ -55,9 +54,10 @@ public class Graph {
     for(int i=0; i<vertices.size(); i++){
       costs.add(Integer.MAX_VALUE);
     }
-    for(int i=0; i<adj.get(0).size();i++){
-      this.pq.add(adj.get(0).get(i));
+    for (int i = 0; i < adj.get(0).size(); i++) {
+      costs.set(adj.get(0).get(i).id, adj.get(0).get(i).disk.cost);
     }
+    this.pq.addAll(adj.get(0));
     while(explored.size()!=vertices.size()){
       if(pq.isEmpty())
         break;
@@ -76,18 +76,21 @@ public class Graph {
       endPathsCosts.add(sCost);
     }
     Collections.sort(endPathsCosts);
+    System.out.println(costs);
+    System.out.println(endPathsCosts);
     return(endPathsCosts.get(0));
   }
 
   public void checkAdj(Pillar cur){
     int edgeCost = cur.disk.cost;
     int pathCost;
-    for(int i =0; i<adj.get(cur.id+1).size(); i++){
-      Pillar v = adj.get(cur.id+1).get(i);
+    for(int i =0; i<adj.get(cur.id).size(); i++){ //cur.id
+      Pillar v = adj.get(cur.id).get(i);
       if(!explored.contains(v)){
-        pathCost = this.costs.get(v.id+1) + edgeCost;
-        if(pathCost < costs.get(cur.id+1)+edgeCost){
-          costs.set(cur.id+1, pathCost);
+        System.out.println(cur.id + " " + this.costs.get(cur.id));
+        pathCost = this.costs.get(cur.id) + edgeCost;
+        if(pathCost < costs.get(v.id) && pathCost >= 0){
+          costs.set(v.id, pathCost);
         }
         this.pq.add(v);
       }
