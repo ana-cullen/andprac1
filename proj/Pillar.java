@@ -1,5 +1,8 @@
 package proj;
 
+import java.util.ArrayList;
+
+
 public class Pillar implements Comparable<Pillar>{
   
     public Coordinate coord;

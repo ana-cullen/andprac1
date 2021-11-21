@@ -45,28 +45,17 @@ public class Graph {
       }
       adj.add(adjV);
     }
-    ArrayList<Integer> endPathsCosts = new ArrayList<>();
-    int[] temp = CFG.test(adj);
-    for(int i=0;i<sinks.size();i++){
-      Pillar n =sinks.get(i);
-      int sCost =-1;
-        sCost = temp[n.id];
-      endPathsCosts.add(sCost);
-    }
-    Collections.sort(endPathsCosts);
-    System.out.println(endPathsCosts);
   }
 
   public int dijkstras(){
     costs.add(0);
+
     for(int i=0; i<vertices.size(); i++){
       costs.add(Integer.MAX_VALUE);
     }
     for (int i = 0; i < adj.get(0).size(); i++) {
       costs.set(adj.get(0).get(i).id, adj.get(0).get(i).disk.cost);
     }
-//    Pillar p = new Pillar(new Coordinate(0, 0), new Disk(0, 0), 0);
-//    pq.add(p);
     this.pq.addAll(adj.get(0));
     while(explored.size()!=vertices.size()){
       if(pq.isEmpty())
@@ -87,7 +76,12 @@ public class Graph {
       endPathsCosts.add(sCost);
     }
     Collections.sort(endPathsCosts);
-    return(endPathsCosts.get(0));
+    if(endPathsCosts.size() == 0){
+      return Integer.MAX_VALUE;
+    }
+    else {
+      return (endPathsCosts.get(0));
+    }
   }
 
   public void checkAdj(Pillar cur){
