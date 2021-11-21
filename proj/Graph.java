@@ -3,14 +3,15 @@ package proj;
 import java.util.*;
 
 public class Graph {
-  
+
+  public int w; //width of canyon
+
   public ArrayList<Pillar> vertices = new ArrayList<Pillar>(); //lenght nm
   public ArrayList<Integer> costs = new ArrayList<Integer>(); //adj (length nm+2)
   public ArrayList<ArrayList<Pillar>> adj = new ArrayList<>();
   public ArrayList<Pillar> sources = new ArrayList<Pillar>(); //pillars that touch y=0
   public ArrayList<Pillar> sinks = new ArrayList<Pillar>(); //pillars that touch y=w
   public ArrayList<Pillar> explored = new ArrayList<Pillar>();
-  public int w; //width of canyon
   public PriorityQueue<Pillar> pq = new PriorityQueue<Pillar>();
 
   public Graph (ArrayList<Coordinate> coords, ArrayList<Disk> disks, int w) {
@@ -44,6 +45,16 @@ public class Graph {
       }
       adj.add(adjV);
     }
+    ArrayList<Integer> endPathsCosts = new ArrayList<>();
+    int[] temp = CFG.test(adj);
+    for(int i=0;i<sinks.size();i++){
+      Pillar n =sinks.get(i);
+      int sCost =-1;
+        sCost = temp[n.id];
+      endPathsCosts.add(sCost);
+    }
+    Collections.sort(endPathsCosts);
+    System.out.println(endPathsCosts);
   }
 
   public int dijkstras(){
@@ -54,6 +65,8 @@ public class Graph {
     for (int i = 0; i < adj.get(0).size(); i++) {
       costs.set(adj.get(0).get(i).id, adj.get(0).get(i).disk.cost);
     }
+//    Pillar p = new Pillar(new Coordinate(0, 0), new Disk(0, 0), 0);
+//    pq.add(p);
     this.pq.addAll(adj.get(0));
     while(explored.size()!=vertices.size()){
       if(pq.isEmpty())
@@ -82,12 +95,13 @@ public class Graph {
       Pillar v = adj.get(cur.id).get(i);
       if(!explored.contains(v)){
         int edgeCost = v.disk.cost;
-        int pathCost = this.costs.get(cur.id) + edgeCost;
-        if(pathCost < costs.get(v.id) && pathCost >= 0){
+        int pathCost = costs.get(cur.id) + edgeCost;
+        if(pathCost < costs.get(v.id)){
           costs.set(v.id, pathCost);
         }
-        this.pq.add(v);
+
       }
+      this.pq.add(v);
     }
   }
 }

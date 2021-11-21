@@ -17,6 +17,12 @@ public class Disk implements Comparable<Disk> {
 
     @Override
     public int compareTo(Disk o) {
-        return this.radius - o.radius;
+        if(this.radius - o.radius != 0){
+            return this.radius - o.radius;
+        }
+        else{
+            return o.cost - this.cost;
+        }
+
     }
 }

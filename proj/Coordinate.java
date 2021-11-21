@@ -1,6 +1,6 @@
 package proj;
 
-public class Coordinate {
+public class Coordinate implements Comparable<Coordinate> {
 
     public int x;
     public int y;
@@ -20,5 +20,16 @@ public class Coordinate {
     @Override
     public String toString(){
         return "("+x+", "+y+")";
+    }
+
+
+    @Override
+    public int compareTo(Coordinate o) {
+        if(this.x-o.x != 0){
+            return this.x-o.x;
+        }
+        else{
+            return this.y-o.y;
+        }
     }
 }
