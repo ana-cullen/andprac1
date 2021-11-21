@@ -19,17 +19,16 @@ public class Main {
         System.out.println(cheapestPathCost);
     }
 
-
     public static void filterDisks(ArrayList <Disk> disks){
-        for(int i = 0; i< disks.size(); i++){
-            for(int j = 0; j< disks.size(); j++){
+        ArrayList<Disk> copyOfDisks = new ArrayList<Disk>(disks);
+        for(int i = 0; i< copyOfDisks.size(); i++){
+            for(int j = 0; j< copyOfDisks.size(); j++){
                 if( i != j){
-                    if(disks.get(i).radius <= disks.get(j).radius && disks.get(i).cost >= disks.get(j).cost)
-                        disks.remove(i);
+                    if(copyOfDisks.get(i).radius <= copyOfDisks.get(j).radius && copyOfDisks.get(i).cost >= copyOfDisks.get(j).cost)
+                        disks.remove(disks.get(i));
                 }
             }
         }
-        //sorts based on radius
         Collections.sort(disks);
         Collections.reverse(disks);
     }
@@ -55,5 +54,4 @@ public class Main {
         myReader.close();
         return w;
     }
-
 }

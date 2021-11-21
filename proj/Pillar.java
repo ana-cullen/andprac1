@@ -26,9 +26,10 @@ public class Pillar implements Comparable<Pillar>{
     }
 
     public boolean inRange(Pillar p){
-      if(this.coord.dist(p.coord) <= this.disk.radius+p.disk.radius && this.coord != p.coord){
-        return true;
-      }
-      return false;
+        int distance = this.coord.dist(p.coord);
+        return (distance <= this.disk.radius + p.disk.radius
+                && (distance != 0)
+                && this.disk.radius < distance + p.disk.radius
+                && p.disk.radius < distance + this.disk.radius);
     }
 }
